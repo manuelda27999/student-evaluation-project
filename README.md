@@ -44,26 +44,44 @@ link to [Figma](https://www.figma.com/design/Xto9rwGVgNFYiX65gXrPnD/Student-eval
 
 User
 
-- id (object id, required, unique)
+- id (uid, required, unique)
 - name (string, required)
 - password (string)
-- permissions (string, required, enum:["student", "teacher", "administrator"])
+- role (string, required, enum:["student", "teacher", "administrator"])
 
-Modul
+Course
 
-- id (object id, required, unique)
+- id (uid, required, unique)
 - name (string, required)
+
+Module
+
+- id (uid, required, unique)
+- name (string, required)
+- course (uid, ref Course)
+
+Aspect
+
+- id (uid, required, unique)
+- name (string, required)
+- course (uid, ref Course)
+- ordinal (number, required)
 
 Mark
 
-- id (object id, required, unique)
-- user (object id, ref user, required)
-- modul (object id, ref modul, required)
-- scoring (array of number)
+- id (uid, required, unique)
+- from (uid, ref User, required)
+- to (uid, ref User, required)
+- course (uid, ref Course, required)
+- module (uid, ref Module, required)
+- aspect (uid, ref Aspect, required)
+- score (number)
 
-Coment
+Comment
 
-- id (object id, required, unique)
-- content (string, required)
-- users(array of object id, ref user)
-- modul(object id, ref modul)
+- id (uid, required, unique)
+- from (uid, ref User, required)
+- to (uid, ref User, required)
+- course (uid, red Module, required)
+- module (uid, ref Module, required)
+- text (string, required)
