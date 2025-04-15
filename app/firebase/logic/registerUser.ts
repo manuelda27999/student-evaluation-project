@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "@firebase/auth";
-import { auth, db } from "../../app/firebase/data/credentials.ts";
+import { auth, db } from "../data/credentials";
 import { doc, setDoc } from "@firebase/firestore";
 
 const registerUser = async (
@@ -25,6 +25,8 @@ const registerUser = async (
     });
 
     console.log("User registered successfully:", userCredential.user.email);
+
+    return userCredential.user;
   } catch (error) {
     console.error("Error registering user:", error);
   }

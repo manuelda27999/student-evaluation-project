@@ -1,4 +1,4 @@
-import { auth } from "../../app/firebase/data/credentials.ts";
+import { auth } from "../data/credentials";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 
 const loginUser = async (email: string, password: string) => {
@@ -9,6 +9,8 @@ const loginUser = async (email: string, password: string) => {
       password
     );
     console.log("User logged in successfully:", userCredential.user.uid);
+
+    return userCredential.user;
   } catch (error) {
     console.error("Error logging in user:", error);
   }
