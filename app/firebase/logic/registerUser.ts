@@ -20,7 +20,6 @@ const registerUser = async (
     await setDoc(doc(db, "users", user.uid), {
       name: name,
       email: email,
-      password: password,
       role: role,
     });
 
@@ -29,6 +28,7 @@ const registerUser = async (
     return userCredential.user;
   } catch (error) {
     console.error("Error registering user:", error);
+    throw error;
   }
 };
 

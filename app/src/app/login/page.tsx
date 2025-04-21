@@ -1,11 +1,26 @@
 "use client";
 
+import loginUser from "../../../firebase/logic/loginUser";
+
 export default function Login() {
   function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
+    const username = data.username as string;
+    const password = data.password as string;
+
+    try {
+      loginUser(username, password).then((userCredential) => {
+        if (userCredential) {
+          console.log("Credenciales del usuario: ");
+          console.log(userCredential?.uid);
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
