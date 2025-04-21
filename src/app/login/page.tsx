@@ -1,8 +1,13 @@
 "use client";
 
 import loginUser from "../../../firebase/logic/loginUser";
+import useAuthRedirect from "@/lib/useAuthRedirect";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  useAuthRedirect();
+  const route = useRouter();
+
   function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -16,6 +21,7 @@ export default function Login() {
         if (userCredential) {
           console.log("Credenciales del usuario: ");
           console.log(userCredential?.uid);
+          route.push("/");
         }
       });
     } catch (error) {

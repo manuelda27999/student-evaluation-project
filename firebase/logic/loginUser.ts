@@ -1,4 +1,4 @@
-import { auth } from "../data/credentials";
+import { auth } from "../credentials";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 
 const loginUser = async (email: string, password: string) => {

@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "@firebase/auth";
-import { auth, db } from "../data/credentials";
+import { auth, db } from "../credentials";
 import { doc, setDoc } from "@firebase/firestore";
 
 const registerUser = async (

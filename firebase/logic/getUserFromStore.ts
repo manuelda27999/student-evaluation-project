@@ -1,5 +1,5 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../data/credentials";
+import { db } from "../credentials";
 
 const getUserWithEmailFromStore = async (email: string) => {
   try {

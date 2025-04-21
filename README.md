@@ -1,69 +1,36 @@
-# Student-evaluation-project
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXRhdHZpeWM5YTJhbHRlNGh0czN1NWVkenF5bmN2ZDhwamZ6MGdydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gKNRbXNnXWoPaXAKnF/giphy.gif)
+## Getting Started
 
-## Intro
+First, run the development server:
 
-Student Evaluation is a project created to share students’ grades for their different modules and to allow them to evaluate their teachers as well.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Functional Description
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project will allow the students check their scoring, evaluate theirself and evaluate the teachers.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Use Cases
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-#### For students
+## Learn More
 
-- List the modules
-- Evaluate theirself in each module
-- View the marks of each module and the average of the entire curse
-- Evaluate the teachers
-- Read the coments of the teacher in each module
-- Change the password of the profile
+To learn more about Next.js, take a look at the following resources:
 
-#### For teachers
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- List the students
-- List the modules
-- Evaluate each student in each module
-- Write a coment to the students in each module
-- View students grades for each module
-- View the grade the students have given to the teacher
-- Change the password of the profile
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-#### For administrator
+## Deploy on Vercel
 
-- Create new modules
-- Create the links to log in the profile
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## UI Design
-
-link to [Figma](https://www.figma.com/design/Xto9rwGVgNFYiX65gXrPnD/Student-evaluation-project?node-id=0-1&p=f&t=yWrBfc4NAXPB11Zl-0)
-
-## Data Model
-
-User
-
-- id (object id, required, unique)
-- name (string, required)
-- password (string)
-- permissions (string, required, enum:["student", "teacher", "administrator"])
-
-Modul
-
-- id (object id, required, unique)
-- name (string, required)
-
-Mark
-
-- id (object id, required, unique)
-- user (object id, ref user, required)
-- modul (object id, ref modul, required)
-- scoring (array of number)
-
-Coment
-
-- id (object id, required, unique)
-- content (string, required)
-- users(array of object id, ref user)
-- modul(object id, ref modul)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
