@@ -30,7 +30,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen w-screen bg-background">
+    <div className="flex flex-col items-center justify-start h-screen w-screen bg-primary">
       <header className="flex items-center w-screen pl-4 pt-4">
         <img
           src="./logoHeader.png"
@@ -82,10 +82,7 @@ export default function Login() {
             />
           </div>
 
-          <button
-            className="bg-secondary text-white rounded-md p-2 mb-4 w-48 mt-3 font-bold"
-            style={{ backgroundColor: "var(--secondary)" }}
-          >
+          <button className="bg-[var(--secondary)] text-white rounded-md p-2 mb-4 w-48 mt-3 font-bold cursor-pointer">
             Iniciar sesión
           </button>
         </form>
