@@ -48,6 +48,7 @@ User
 - name (string, required)
 - password (string)
 - role (string, required, enum:["student", "teacher", "administrator"])
+- course (uid, ref Course)
 
 Course
 
