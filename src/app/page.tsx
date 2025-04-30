@@ -1,13 +1,20 @@
 "use client";
+import { useState } from "react";
 import useAuthRedirect from "@/lib/useAuthRedirect";
 import { useRouter } from "next/navigation";
-import logoutUser from "../../firebase/logic/logoutUser";
+import logoutUser from "../../firebase/logic/users/logoutUser";
 import SideMenu from "./components/SideMenu";
 import ModulePage from "./components/ModulePage";
 
 export default function Home() {
   useAuthRedirect();
   const route = useRouter();
+
+  const [module, setModule] = useState("Control de versiones con Git");
+
+  const handleChangeModule = (newModule: string) => {
+    setModule(newModule);
+  };
 
   const handleLogout = () => {
     try {
@@ -37,8 +44,8 @@ export default function Home() {
         </button>
       </header>
       <section className="h-full w-full flex flex-row items-center justify-center">
-        <SideMenu />
-        <ModulePage />
+        <SideMenu onChangeModule={handleChangeModule} />
+        <ModulePage module={module} />
       </section>
     </main>
   );

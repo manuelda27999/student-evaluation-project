@@ -1,6 +1,6 @@
 "use client";
 
-import loginUser from "../../../firebase/logic/loginUser";
+import loginUser from "../../../firebase/logic/users/loginUser";
 import useAuthRedirect from "@/lib/useAuthRedirect";
 import { useRouter } from "next/navigation";
 
@@ -31,13 +31,15 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-start h-screen w-screen bg-primary">
-      <header className="flex items-center w-screen pl-4 pt-4">
+      <header className="flex items-center w-screen p-4 justify-between md:justify-start">
         <img
           src="./logoHeader.png"
           alt="Logo de Eurofirms University"
-          className="h-12 mr-8 ml-4"
+          className="h-12 md:mr-8"
         />
-        <h1 className="text-3xl font-bold">Tech Academy</h1>
+        <h1 className="text-3xl font-bold w-min sm:w-fit sm:ml-0">
+          Tech Academy
+        </h1>
       </header>{" "}
       <main className="h-4/5 w-full flex flex-col items-center justify-center">
         <form
@@ -60,7 +62,7 @@ export default function Login() {
               className="bg-white rounded-md p-2 mb-4 text-black"
               type="text"
               name="username"
-              id=""
+              id="username"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -78,7 +80,7 @@ export default function Login() {
               className="bg-white rounded-md p-2 mb-4 text-black"
               type="password"
               name="password"
-              id=""
+              id="password"
             />
           </div>
 

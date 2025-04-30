@@ -4,7 +4,9 @@ interface Module {
   name: string;
 }
 
-export default function SideMenu() {
+export default function SideMenu(props: {
+  onChangeModule: (module: string) => void;
+}) {
   const [course, setCourse] = useState("Bootcamp Desarrollo Web");
   const [modules, setModules] = useState<Module[]>([]);
 
@@ -27,8 +29,10 @@ export default function SideMenu() {
         <h2 className="text-black text-2xl py-3 font-bold  w-full text-center">
           {course}
         </h2>
-        <p className="text-red-700 mb-3">Media total del alumno 6.3</p>
-        <p className="text-blue-700">Media total del profesor 7.3</p>
+        <p className="text-red-700 mb-3">
+          Autoevaluación del alumno: Aceptable
+        </p>
+        <p className="text-blue-700">Evaluación del profesor: Muy bien</p>
       </div>
 
       <ul className="w-full flex flex-col items-center justify-center">
@@ -38,6 +42,9 @@ export default function SideMenu() {
               <li
                 className="text-black h-fit px-3 py-6 w-full flex flex-col items-center justify-between hover:bg-[var(--primary)] hover:text-white cursor-pointer"
                 key={oneModule.name}
+                onClick={() => {
+                  props.onChangeModule(oneModule.name);
+                }}
               >
                 <p className="w-fit text-xl text-center">{oneModule.name}</p>
               </li>

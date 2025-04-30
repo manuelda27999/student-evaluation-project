@@ -1,4 +1,4 @@
-import registerUser from "../logic/registerUser";
+import registerUser from "../../logic/users/registerUser";
 import { getAuth, signOut } from "firebase/auth";
 
 describe("registerUser", () => {
@@ -6,10 +6,10 @@ describe("registerUser", () => {
     await signOut(getAuth());
   });
 
-  test("should registering a new user", async () => {
-    const name = "Manuel David";
-    const email = `manuel@david.com`;
-    const password = "123123123";
+  test("should registering a new random user", async () => {
+    const name = "ExampleName";
+    const email = `test${Date.now()}@example.com`;
+    const password = Math.floor(Math.random() * 1000000).toString();
     const role = "student";
 
     const user = await registerUser(name, email, password, role);
