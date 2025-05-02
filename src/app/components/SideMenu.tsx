@@ -12,6 +12,7 @@ export default function SideMenu(props: {
 
   useEffect(() => {
     setModules([
+      { name: "Programación en un lenguaje elemental" },
       { name: "Control de versiones con Git" },
       { name: "Programación en JavaScript" },
       { name: "Desarrollo de páginas web" },

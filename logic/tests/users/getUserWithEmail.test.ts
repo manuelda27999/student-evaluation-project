@@ -1,6 +1,6 @@
 //Test to login a user
 import getUserWithEmail from "../logic/getUserFromStore";
-import registerUser from "../../logic/users/registerUser";
+import registerUser from "../../users/registerUser";
 import { getAuth, signOut } from "firebase/auth";
 
 describe("getUser", () => {

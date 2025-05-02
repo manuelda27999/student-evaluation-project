@@ -1,5 +1,5 @@
 import { getDocs, collection } from "firebase/firestore";
-import { db } from "../../credentials";
+import { db } from "../../firebase/credentials";
 
 const getCourses = async () => {
   try {

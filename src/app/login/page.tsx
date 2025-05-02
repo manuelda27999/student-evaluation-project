@@ -1,6 +1,6 @@
 "use client";
 
-import loginUser from "../../../firebase/logic/users/loginUser";
+import loginUser from "../../../logic/users/loginUser";
 import useAuthRedirect from "@/lib/useAuthRedirect";
 import { useRouter } from "next/navigation";
 

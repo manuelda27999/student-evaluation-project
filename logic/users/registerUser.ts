@@ -1,13 +1,12 @@
 import { createUserWithEmailAndPassword } from "@firebase/auth";
-import { auth, db } from "../../credentials";
+import { auth, db } from "../../firebase/credentials";
 import { doc, setDoc } from "@firebase/firestore";
 
 const registerUser = async (
   name: string,
   email: string,
   password: string,
-  role: string,
-  course: string
+  role: string
 ) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -18,13 +17,13 @@ const registerUser = async (
 
     const user = userCredential.user;
 
-    const courseCreated = await getDocs(doc(db, "courses", course));
-
     await setDoc(doc(db, "users", user.uid), {
       name: name,
       email: email,
+      password: password,
       role: role,
-      cours: course,
+      marks: [],
+      coments: [],
     });
 
     console.log("User registered successfully:", userCredential.user.email);

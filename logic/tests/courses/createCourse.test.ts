@@ -1,4 +1,4 @@
-import createCourse from "../../logic/courses/createCourse";
+import createCourse from "../../courses/createCourse";
 import { getAuth, signOut } from "firebase/auth";
 
 describe("createCourse", () => {

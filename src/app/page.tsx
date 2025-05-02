@@ -2,7 +2,7 @@
 import { useState } from "react";
 import useAuthRedirect from "@/lib/useAuthRedirect";
 import { useRouter } from "next/navigation";
-import logoutUser from "../../firebase/logic/users/logoutUser";
+import logoutUser from "../../logic/users/logoutUser";
 import SideMenu from "./components/SideMenu";
 import ModulePage from "./components/ModulePage";
 
