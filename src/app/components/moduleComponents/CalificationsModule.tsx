@@ -1,146 +1,80 @@
 import { useRef, useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 
-export default function CalificationsModule() {
+export default function CalificationsModule(props: {
+  teacherEvaluation: number[];
+  selfEvaluation: number[];
+  aspects: string[];
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  const [teacherEvaluation, setTeacherEvaluation] = useState([9, 9, 4, 5, 7]);
-  const [selfEvaluation, setSelfEvaluation] = useState([10, 10, 6, 5, 9]);
 
   useEffect(() => {
     if (canvasRef.current != null) {
       const context = canvasRef.current;
 
       const chartInstance = new Chart(context, {
-        type: "bar",
+        type: "radar",
         data: {
-          labels: [
-            "Actitud",
-            ["Trabajo en", "equipo"],
-            "Independencia",
-            ["Nivel", "técnico"],
-            ["Posicionamiento", "general"],
-          ],
+          labels: props.aspects,
           datasets: [
             {
               label: "Autoevaluación",
-              data: selfEvaluation,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(255, 99, 132, 1)",
-                "rgba(255, 99, 132, 1)",
-                "rgba(255, 99, 132, 1)",
-                "rgba(255, 99, 132, 1)",
-              ],
-              borderWidth: 1,
+              data: props.selfEvaluation,
+              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 2,
             },
             {
               label: "Evaluación del profesor",
-              data: teacherEvaluation,
-              backgroundColor: [
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-              ],
-              borderColor: [
-                "rgba(54, 162, 235, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(54, 162, 235, 1)",
-              ],
-              borderWidth: 1,
+              data: props.teacherEvaluation,
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 2,
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 10,
-              ticks: {
-                stepSize: 1,
-                callback: function (value: number | string) {
-                  const labels = [
-                    "Nada",
-                    "Pobre",
-                    "Insuficiente",
-                    "Regular",
-                    "Aceptable",
-                    "Bien",
-                    "Muy bien",
-                    "Notable",
-                    "Excelente",
-                    "Sobresaliente",
-                  ];
-                  return typeof value === "number" ? labels[value - 1] : value;
-                },
-              },
-            },
-          },
           plugins: {
             legend: {
               display: true,
             },
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem) {
-                  const labels = [
-                    "Nada",
-                    "Pobre",
-                    "Insuficiente",
-                    "Regular",
-                    "Aceptable",
-                    "Bien",
-                    "Muy bien",
-                    "Notable",
-                    "Excelente",
-                    "Sobresaliente",
-                  ];
-
-                  const value = tooltipItem.raw;
-                  if (typeof value === "number") {
-                    if (tooltipItem.datasetIndex === 0) {
-                      return "Autoevaluación: " + labels[value - 1];
-                    } else {
-                      return "Evaluación del profesor: " + labels[value - 1];
-                    }
-                  }
-                },
+          },
+          scales: {
+            r: {
+              min: 0,
+              max: 4,
+              ticks: {
+                stepSize: 1,
+              },
+              pointLabels: {
+                callback: (label: string) => label.split("\n"),
               },
             },
           },
         },
       });
 
+      chartInstance.update();
+
       return () => {
         chartInstance.destroy();
       };
     }
-  }, []);
+  }, [props.teacherEvaluation, props.selfEvaluation]);
 
   return (
-    <div className="w-full h-full flex flex-row items-start justify-baseline">
+    <div className="w-full h-full flex flex-col items-start justify-baseline">
       <canvas
         ref={canvasRef}
-        className="max-w-1/2 max-h-6/12 m-4 mt-10"
+        className="md:max-w-1/2 md:max-h-6/12 mt-10 w-full h-64"
       ></canvas>
       <div className="w-full flex flex-col items-center justify-start mt-10">
         <h3 className="text-black text-2xl font-bold w-3/4 mb-4 ">
           Comentarios del profesor
         </h3>
-        <p className="text-black w-3/4">
+        <p className="text-black">
           Tu trabajo está dando sus frutos, sigue en esta línea y conseguirás
           buenos resultados. Podrías mejorar tu capacidad de aprendizaje y ser
           más aútonomo buscando información en interner, te propongo solucionar

@@ -42,11 +42,11 @@ const getTeacherEvaluationFromOneModule = async (
     const filteredMarksWithValues = filteredMarks.map((mark: Mark) => {
       const markAspectId = mark.aspect.split("/").pop();
 
-      return { aspectId: markAspectId, value: mark.value };
+      return mark.value;
     });
 
-    console.log("Filtered Marks:", filteredMarksWithValues);
-    return filteredMarksWithValues;
+    /*     console.log("Filtered Marks:", filteredMarksWithValues);
+     */ return filteredMarksWithValues;
   } catch (error) {
     console.error("Error getting marks:", error);
   }

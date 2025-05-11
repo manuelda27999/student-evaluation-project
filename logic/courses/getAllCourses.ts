@@ -1,7 +1,7 @@
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase/credentials";
 
-const getCourses = async () => {
+const getAllCourses = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "courses"));
 
@@ -18,4 +18,4 @@ const getCourses = async () => {
   }
 };
 
-export default getCourses;
+export default getAllCourses;

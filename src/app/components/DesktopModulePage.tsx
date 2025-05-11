@@ -3,19 +3,19 @@ import { useRef, useEffect, useState, use } from "react";
 import CalificationsModule from "./moduleComponents/CalificationsModule";
 import SelfEvaluationModule from "./moduleComponents/SelfEvaluationModule";
 
-export default function ModulePage(props: { module: string }) {
+export default function DesktopModulePage(props: { module: string }) {
   const [selfEvaluationFinished, setSelfEvaluationFinished] = useState(false);
   const [teacherEvaluationFinished, setTeacherEvaluationFinished] =
     useState(false);
 
   useEffect(() => {
-    if (!teacherEvaluationFinished) {
+    /* if (!teacherEvaluationFinished) {
       alert("No hay datos de evaluación del profesor");
     }
 
     if (!selfEvaluationFinished) {
       alert("No hay datos de autoevaluación");
-    }
+    } */
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 //Test to login a user
-import loginUser from "../logic/loginUser";
+import loginUser from "../../users/loginUser";
 import registerUser from "../../users/registerUser";
 import { getAuth, signOut } from "firebase/auth";
 

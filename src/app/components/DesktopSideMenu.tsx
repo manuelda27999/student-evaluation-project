@@ -4,7 +4,7 @@ interface Module {
   name: string;
 }
 
-export default function SideMenu(props: {
+export default function DesktopSideMenu(props: {
   onChangeModule: (module: string) => void;
 }) {
   const [course, setCourse] = useState("Bootcamp Desarrollo Web");

@@ -1,7 +1,7 @@
 //Test to login a user
-import getUserWithEmail from "../logic/getUserFromStore";
 import registerUser from "../../users/registerUser";
 import { getAuth, signOut } from "firebase/auth";
+import getUserWithEmailFromStore from "../../users/getUserFromStore";
 
 describe("getUser", () => {
   afterAll(async () => {
@@ -16,7 +16,7 @@ describe("getUser", () => {
 
     await registerUser(name, email, password, role);
 
-    const result = await getUserWithEmail(email);
+    const result = await getUserWithEmailFromStore(email);
 
     expect(result).toHaveProperty("name", name);
     expect(result).toHaveProperty("email", email);

@@ -9,6 +9,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import getSelfEvaluationFromOneModule from "../logic/marks/getSelfEvaluationFromOneModule";
+import { onAuthStateChanged } from "firebase/auth";
 
 type Mark = {
   aspect: string;
@@ -28,40 +30,16 @@ async function main() {
   const userId = "W3RxwOPnJXZ2SyEDhhhTQVb5chA3";
 
   try {
-    const userRef = doc(db, "users", userId);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) {
-      throw new Error("User does not exist");
-    }
-
-    const userData = userSnap.data();
-
-    const marks = userData.marks || [];
-
-    const filteredMarks = marks.filter((mark: Mark) => {
-      const markModuleId = mark.module.split("/").pop();
-      const markCourseId = mark.course.split("/").pop();
-      const markUserId = mark.from.split("/").pop();
-
-      if (
-        markModuleId === moduleId &&
-        markCourseId === courseId &&
-        markUserId === userId
-      )
-        return true;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return user.uid;
+      } else {
+        console.log("No user is signed in.");
+        return null;
+      }
     });
-
-    const filteredMarksWithValues = filteredMarks.map((mark: Mark) => {
-      const markAspectId = mark.aspect.split("/").pop();
-
-      return { aspectId: markAspectId, value: mark.value };
-    });
-
-    console.log("Filtered Marks:", filteredMarksWithValues);
-    return filteredMarksWithValues;
   } catch (error) {
-    console.error("Error getting marks:", error);
+    console.error("Error getting user ID:", error);
   }
 }
 

@@ -1,5 +1,5 @@
 import { after } from "node:test";
-import getCourses from "../../courses/getCourses";
+import getCourses from "../../courses/getAllCourses";
 import { getAuth, signOut } from "firebase/auth";
 
 describe("Get all the courses", () => {

@@ -21,6 +21,8 @@ export default function Login() {
         if (userCredential) {
           console.log("Credenciales del usuario: ");
           console.log(userCredential?.uid);
+
+          sessionStorage.setItem("userId", userCredential?.uid);
           route.push("/");
         }
       });
