@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center w-full h-16 pl-4 fixed bg-[var(--primary)] z-50">
+    <header className="flex items-center w-screen h-16 px-4 fixed bg-[var(--primary)] z-50">
       <img
         src="/logoHeader.png"
         alt="Logo de Eurofirms University"
@@ -26,7 +26,7 @@ export default function Header() {
       />
       <h1 className="text-xl font-semibold">Tech Academy</h1>
       <button
-        className="bg-[var(--secondary)] text-white rounded-md p-2 mb-4 w-24 mt-3 font-bold ml-auto mr-4"
+        className="bg-[var(--secondary)] text-white rounded-md p-2 w-24 font-bold ml-auto"
         onClick={handleLogout}
       >
         Logout

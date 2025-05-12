@@ -30,16 +30,20 @@ async function main() {
   const userId = "W3RxwOPnJXZ2SyEDhhhTQVb5chA3";
 
   try {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        return user.uid;
-      } else {
-        console.log("No user is signed in.");
-        return null;
-      }
-    });
+    let courseName = "";
+    const courseRef = doc(db, "courses", courseId);
+    const courseSnap = await getDoc(courseRef);
+
+    if (!courseSnap.exists()) throw new Error("Course does not exists");
+
+    const courseData = courseSnap.data();
+    courseName = courseData.name;
+
+    console.log("Course name:", courseName);
+
+    return courseName;
   } catch (error) {
-    console.error("Error getting user ID:", error);
+    throw error;
   }
 }
 

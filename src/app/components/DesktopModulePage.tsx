@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, use } from "react";
 
-import CalificationsModule from "./moduleComponents/CalificationsModule";
-import SelfEvaluationModule from "./moduleComponents/SelfEvaluationModule";
+import CalificationsModule from "./modules/CalificationsModule";
+import SelfEvaluationModule from "./modules/SelfEvaluationModule";
 
 export default function DesktopModulePage(props: { module: string }) {
   const [selfEvaluationFinished, setSelfEvaluationFinished] = useState(false);

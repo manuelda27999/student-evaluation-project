@@ -76,10 +76,10 @@ export default function CalificationsModule(props: {
         className="md:max-w-1/2 md:max-h-6/12 mt-4 w-full h-64"
       ></canvas>
       <div className="w-full flex flex-col items-center justify-start mt-10">
-        <h3 className="text-black text-2xl font-bold w-3/4 mb-4 ">
+        <h3 className="text-black text-2xl font-bold w-3/4 mb-2 ">
           Comentarios del profesor
         </h3>
-        <p className="text-black">
+        <p className="text-black px-4">
           Tu trabajo está dando sus frutos, sigue en esta línea y conseguirás
           buenos resultados. Podrías mejorar tu capacidad de aprendizaje y ser
           más aútonomo buscando información en interner, te propongo solucionar
