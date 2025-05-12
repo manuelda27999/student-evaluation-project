@@ -8,6 +8,10 @@ export default function CalificationsModule(props: {
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  /* console.log(props.teacherEvaluation);
+  console.log(props.selfEvaluation);
+  console.log(props.aspects); */
+
   useEffect(() => {
     if (canvasRef.current != null) {
       const context = canvasRef.current;
@@ -47,6 +51,7 @@ export default function CalificationsModule(props: {
               max: 4,
               ticks: {
                 stepSize: 1,
+                display: false,
               },
               pointLabels: {
                 callback: (label: string) => label.split("\n"),
@@ -68,7 +73,7 @@ export default function CalificationsModule(props: {
     <div className="w-full h-full flex flex-col items-start justify-baseline">
       <canvas
         ref={canvasRef}
-        className="md:max-w-1/2 md:max-h-6/12 mt-10 w-full h-64"
+        className="md:max-w-1/2 md:max-h-6/12 mt-4 w-full h-64"
       ></canvas>
       <div className="w-full flex flex-col items-center justify-start mt-10">
         <h3 className="text-black text-2xl font-bold w-3/4 mb-4 ">

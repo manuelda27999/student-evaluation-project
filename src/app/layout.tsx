@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import HeaderWrapper from "./components/HeaderWrapper";
 
 export const metadata: Metadata = {
   title: "Tech Academy Evaluation",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-screen h-screen">{children}</body>
+      <body className="w-screen h-screen">
+        <HeaderWrapper />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import getSelfEvaluationFromOneModule from "../../../../logic/marks/getSelfEvaluationFromOneModule";
 import getTeacherEvaluationFromOneModule from "../../../../logic/marks/getTeacherEvaluationFromOneModule";
@@ -9,6 +9,9 @@ import CalificationsModule from "@/app/components/moduleComponents/Califications
 export default function ModuloPage() {
   const params = useParams();
   const slug = params?.slug as string;
+  const searchParams = useSearchParams();
+  const moduleName = searchParams.get("moduleName") as string;
+  const router = useRouter();
 
   const [selfEvaluation, setSelfEvaluation] = useState<number[]>([]);
   const [teacherEvaluation, setTeacherEvaluation] = useState<number[]>([]);
@@ -67,11 +70,20 @@ export default function ModuloPage() {
   }, [slug]);
 
   return (
-    <main className="">
-      <h1 className="text-2xl font-bold">Página del módulo</h1>
-      <p className="mt-4 text-lg text-gray-600">
-        Estás viendo el módulo: <strong>{slug}</strong>
-      </p>
+    <main className="pt-16">
+      <div className="flex flex-row bg-[var(--primary)]">
+        <h2 className="px-2 text-xl my-2 font-bold ">
+          {"Módulo " + slug + ": " + moduleName}
+        </h2>
+        <button onClick={() => router.back()} className="p-2">
+          <img
+            src="/volver.png"
+            alt="Botón de volver"
+            className="w-18 cursor-pointer"
+          />
+        </button>
+      </div>
+
       <CalificationsModule
         teacherEvaluation={teacherEvaluation}
         selfEvaluation={selfEvaluation}

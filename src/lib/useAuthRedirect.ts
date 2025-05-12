@@ -12,8 +12,10 @@ export default function useAuthRedirect() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         router.push("/");
+        return true;
       } else {
         router.push("/login");
+        return false;
       }
     });
 

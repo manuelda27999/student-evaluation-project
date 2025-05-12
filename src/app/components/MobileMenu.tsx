@@ -46,7 +46,11 @@ export default function MobileMenu() {
                 className="text-black h-fit px-3 py-6 w-full flex flex-col items-center justify-between hover:bg-[var(--primary)] hover:text-white cursor-pointer"
                 key={oneModule.name}
                 onClick={() => {
-                  router.push(`/modulo/${oneModule.slug}`);
+                  router.push(
+                    `/modulo/${oneModule.slug}?moduleName=${
+                      modules[Number(oneModule.slug)].name
+                    }`
+                  );
                 }}
               >
                 <p className="w-fit text-xl text-center">{oneModule.name}</p>
