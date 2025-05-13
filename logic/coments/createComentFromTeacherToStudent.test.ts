@@ -1,9 +1,9 @@
 import createComentFromTeacherToStudent from "./createComentFromTeacherToStudent";
 
 const userId = "W3RxwOPnJXZ2SyEDhhhTQVb5chA3";
-const text = "Buen trabajo del módulo 0";
+const text = "Buen trabajo del módulo 2";
 const courseId = "uytEidnU3GVsyhNcpbmc";
-const moduleId = 0;
+const moduleId = 2;
 const issuerUserId = "ws2eKMxmbGUmZGztQvpeKN2qFF12";
 
 const handleCreateComent = async () => {
