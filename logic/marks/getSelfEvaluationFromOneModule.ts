@@ -5,7 +5,7 @@ type Mark = {
   aspect: string;
   course: string;
   from: string;
-  module: string;
+  module: number;
   value: number;
 };
 

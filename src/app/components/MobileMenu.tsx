@@ -17,8 +17,6 @@ export default function MobileMenu() {
   const [courseName, setCourseName] = useState<string | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
 
-  console.log(modules);
-
   const handleGetModules = async (course: string) => {
     try {
       const userId = sessionStorage.getItem("userId");

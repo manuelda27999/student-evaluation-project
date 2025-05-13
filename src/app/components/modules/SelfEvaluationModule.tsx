@@ -8,13 +8,6 @@ export default function SelfEvaluationModule(props: {
   moduleId: number;
 }) {
   const [values, setValues] = useState([0, 0, 0, 0, 0]);
-  const [aspects, setAspects] = useState<string[]>([
-    "Actitud",
-    "Trabajo en \nequipo",
-    "Independencia",
-    "Nivel técnico",
-    "Posicionamiento \ngeneral",
-  ]);
 
   const router = useRouter();
 
@@ -91,50 +84,51 @@ export default function SelfEvaluationModule(props: {
           className="w-full flex flex-col items-center justify-start"
           onSubmit={handleSendSelfEvaluation}
         >
-          {aspects.map((aspect, index) => {
-            return (
-              <div
-                key={index}
-                className="w-full flex flex-col items-start justify-start mb-6"
-              >
-                <div className="flex flex-row items-center mb-2">
-                  <label
-                    htmlFor={aspect}
-                    className="text-xl font-semibold text-black mr-1 underline"
-                  >
-                    {aspect}
-                  </label>
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault();
-                      console.log("info");
+          {props.aspects &&
+            props.aspects.map((aspect, index) => {
+              return (
+                <div
+                  key={index}
+                  className="w-full flex flex-col items-start justify-start mb-6"
+                >
+                  <div className="flex flex-row items-center mb-2">
+                    <label
+                      htmlFor={aspect}
+                      className="text-xl font-semibold text-black mr-1 underline"
+                    >
+                      {aspect}
+                    </label>
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        console.log("info");
+                      }}
+                    >
+                      <img
+                        src="/informacion.png"
+                        alt="Botón de información"
+                        className="w-4 pb-4"
+                      />
+                    </button>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="40"
+                    id={aspect}
+                    className="w-full"
+                    value={values[index]}
+                    onChange={(e) => {
+                      handleChange(index, parseInt(e.target.value));
                     }}
-                  >
-                    <img
-                      src="/informacion.png"
-                      alt="Botón de información"
-                      className="w-4 pb-4"
-                    />
-                  </button>
+                  />
+                  <div className="flex flex-row items-center justify-between w-full mt-2">
+                    <p className="text-black font-semibold">Nada</p>
+                    <p className="text-black font-semibold">Destaca</p>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="40"
-                  id={aspect}
-                  className="w-full"
-                  value={values[index]}
-                  onChange={(e) => {
-                    handleChange(index, parseInt(e.target.value));
-                  }}
-                />
-                <div className="flex flex-row items-center justify-between w-full mt-2">
-                  <p className="text-black font-semibold">Nada</p>
-                  <p className="text-black font-semibold">Destaca</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
           <div className="w-full flex flex-col items-start justify-start mb-6">
             <div>
               <label

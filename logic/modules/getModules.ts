@@ -1,6 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/credentials";
 import getSelfEvaluationFromOneModule from "../marks/getSelfEvaluationFromOneModule";
+import getTeacherEvaluationFromOneModule from "../marks/getTeacherEvaluationFromOneModule";
 
 const getModules = async (userId: string, courseId: string) => {
   try {
@@ -20,7 +21,7 @@ const getModules = async (userId: string, courseId: string) => {
           i.toString()
         );
 
-        const teacherEvaluation = await getSelfEvaluationFromOneModule(
+        const teacherEvaluation = await getTeacherEvaluationFromOneModule(
           userId,
           courseId,
           i.toString()

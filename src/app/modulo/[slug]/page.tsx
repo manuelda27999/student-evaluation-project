@@ -6,6 +6,7 @@ import getSelfEvaluationFromOneModule from "../../../../logic/marks/getSelfEvalu
 import getTeacherEvaluationFromOneModule from "../../../../logic/marks/getTeacherEvaluationFromOneModule";
 import CalificationsModule from "@/app/components/modules/CalificationsModule";
 import SelfEvaluationModule from "@/app/components/modules/SelfEvaluationModule";
+import getAspects from "../../../../logic/aspects/getAspects";
 
 export default function ModuloPage() {
   const params = useParams();
@@ -16,17 +17,12 @@ export default function ModuloPage() {
 
   const [selfEvaluation, setSelfEvaluation] = useState<number[]>([]);
   const [teacherEvaluation, setTeacherEvaluation] = useState<number[]>([]);
-  const [aspects, setAspects] = useState<string[]>([
-    "Actitud",
-    "Trabajo en \nequipo",
-    "Independencia",
-    "Nivel técnico",
-    "Posicionamiento \ngeneral",
-  ]);
+  const [aspects, setAspects] = useState<string[]>([]);
 
   /* console.log(selfEvaluation);
   console.log(teacherEvaluation);
   console.log(aspects); */
+  /* console.log("Aspects", aspects); */
 
   const handleGetSelfEvaluation = async (
     userId: string,
@@ -62,11 +58,22 @@ export default function ModuloPage() {
     }
   };
 
+  const handleGetAspects = async (courseID: string) => {
+    try {
+      const aspects = await getAspects(courseID);
+      setAspects(aspects);
+    } catch (error) {
+      console.error("Error getting aspects:", error);
+    }
+  };
+
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
-    if (typeof userId === "string") {
-      handleGetSelfEvaluation(userId, "uytEidnU3GVsyhNcpbmc", moduleId);
-      handleGetTeacherEvaluation(userId, "uytEidnU3GVsyhNcpbmc", moduleId);
+    const courseId = sessionStorage.getItem("courseId");
+    if (typeof userId === "string" && typeof courseId === "string") {
+      handleGetSelfEvaluation(userId, courseId, moduleId);
+      handleGetTeacherEvaluation(userId, courseId, moduleId);
+      handleGetAspects(courseId);
     }
   }, [moduleId]);
 
@@ -91,6 +98,7 @@ export default function ModuloPage() {
           teacherEvaluation={teacherEvaluation}
           selfEvaluation={selfEvaluation}
           aspects={aspects}
+          moduleId={Number(moduleId)}
         />
       )}
     </main>
