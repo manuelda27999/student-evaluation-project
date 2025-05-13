@@ -3,8 +3,8 @@ import createMark from "./createMark";
 const userId = "W3RxwOPnJXZ2SyEDhhhTQVb5chA3";
 const courseId = "uytEidnU3GVsyhNcpbmc";
 const issuerUserId = "ws2eKMxmbGUmZGztQvpeKN2qFF12";
-const moduleId = 2;
-const value = 4;
+const moduleId = 3;
+const value = 3;
 
 const handleCreateFiveMark = async () => {
   try {
