@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import HeaderWrapper from "./components/HeaderWrapper";
+import HeaderWrapper from "../components/HeaderWrapper";
+import { PopupProvider } from "@/context/PopupContext";
+import Popup from "@/components/Pop-up";
 
 export const metadata: Metadata = {
   title: "Tech Academy Evaluation",
@@ -15,8 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="w-screen h-screen">
-        <HeaderWrapper />
-        {children}
+        <PopupProvider>
+          <HeaderWrapper />
+          {children}
+          <Popup />
+        </PopupProvider>
       </body>
     </html>
   );

@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getModules from "../../../logic/modules/getModules";
 import { useRouter } from "next/navigation";
-import getNameOfCourse from "../../../logic/courses/getNameOfCourse";
+import { usePopup } from "@/context/PopupContext";
+import getModules from "../../logic/modules/getModules";
+import getNameOfCourse from "../../logic/courses/getNameOfCourse";
 
 interface Module {
   name: string;
@@ -13,6 +14,7 @@ interface Module {
 
 export default function MobileMenu() {
   const router = useRouter();
+  const { openPopup } = usePopup();
 
   const [courseName, setCourseName] = useState<string | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
@@ -45,6 +47,15 @@ export default function MobileMenu() {
 
     handleGetModules(courseId);
     handleGetCourseName(courseId);
+
+    const tutorialDone = localStorage.getItem("tutorialDone");
+    if (!tutorialDone) {
+      openPopup(
+        "Tutorial inicial",
+        "👋 ¡Bienvenido al tutorial inicial de la aplicación de evaluaciones!\n\nAquí los profesores valorarán tu desempeño durante la formación y te darán feedback para que sigas mejorando. 📈\n\nEn la primera sección podrás acceder al resumen del curso. Después, avanzarás por los módulos uno por uno.\n\n✅ Los tics indican si un módulo ya tiene su autoevaluación o la evaluación del profesor completada.\n\n🔒 Recuerda: para ver la evaluación del profesor, primero debes completar tu autoevaluación."
+      );
+      localStorage.setItem("tutorialDone", "true");
+    }
   }, []);
 
   return (

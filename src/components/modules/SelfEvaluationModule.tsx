@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import createMark from "../../../../logic/marks/createMark";
-import createComentFromStudentToTeachers from "../../../../logic/coments/createComentFromStudentToTeacher";
+import { usePopup } from "@/context/PopupContext";
+import createMark from "../../../logic/marks/createMark";
+import createComentFromStudentToTeachers from "../../../logic/coments/createComentFromStudentToTeacher";
 
 export default function SelfEvaluationModule(props: {
   aspects: string[];
   moduleId: number;
 }) {
-  const [values, setValues] = useState([0, 0, 0, 0, 0]);
-
   const router = useRouter();
+  const { openPopup } = usePopup();
+
+  const [values, setValues] = useState([0, 0, 0, 0, 0]);
+  const aspectsInformation = [
+    "Evalúa tu disposición general frente al módulo: tu interés, energía, iniciativa y constancia. ¿Te has implicado activamente en las sesiones? ¿Has mantenido una actitud positiva y receptiva ante los retos propuestos?",
+    "Reflexiona sobre cómo has colaborado con tus compañeros: comunicación, respeto y reparto de tareas. ¿Has contribuido al trabajo común, apoyado a los demás y buscado el consenso en lugar del conflicto?",
+    "Considera tu capacidad para trabajar de forma autónoma, sin depender constantemente del apoyo del profesorado. ¿Has sido capaz de organizar tu tiempo, tomar decisiones propias y buscar soluciones por tu cuenta?",
+    "Evalúa tu dominio de los conceptos y herramientas técnicas trabajadas en el módulo. ¿Has demostrado competencia al aplicarlas? ¿Has mejorado desde el inicio y sabes identificar tus propios errores o aciertos?",
+    "Haz una valoración global de tu desarrollo durante este módulo. Ten en cuenta tu evolución, fortalezas y puntos de mejora. ¿Dónde te situarías respecto al resto del grupo o en relación con tus propias expectativas?",
+  ];
 
   useEffect(() => {
     const targetValue = 20;
@@ -67,10 +76,14 @@ export default function SelfEvaluationModule(props: {
         userId
       );
 
-      router.push("/home");
+      router.push("/");
     } catch (error) {
       console.error("Error sending self evaluation:", error);
     }
+  };
+
+  const handleOpenPopup = (title: string, content: string) => {
+    openPopup(title, content);
   };
 
   return (
@@ -101,7 +114,7 @@ export default function SelfEvaluationModule(props: {
                     <button
                       onClick={(event) => {
                         event.preventDefault();
-                        console.log("info");
+                        handleOpenPopup(aspect, aspectsInformation[index]);
                       }}
                     >
                       <img
@@ -140,7 +153,10 @@ export default function SelfEvaluationModule(props: {
               <button
                 onClick={(event) => {
                   event.preventDefault();
-                  console.log("info");
+                  handleOpenPopup(
+                    "Comentario",
+                    "En este apartado podrás hablar de cuales son tus sensaciones durante el curso, si quieres darnos feedback sobre algún punto en específico o si hay algo que debamos saber durante el desarollo de este módulo."
+                  );
                 }}
               >
                 <img

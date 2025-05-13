@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import useAuthRedirect from "@/lib/useAuthRedirect";
-import DesktopSideMenu from "./components/DesktopSideMenu";
-import DesktopModulePage from "./components/DesktopModulePage";
-import MobileMenu from "./components/MobileMenu";
+import DesktopSideMenu from "../components/DesktopSideMenu";
+import DesktopModulePage from "../components/DesktopModulePage";
+import MobileMenu from "../components/MobileMenu";
 
 export default function Home() {
   useAuthRedirect();

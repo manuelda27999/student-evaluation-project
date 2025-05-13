@@ -4,8 +4,8 @@ import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import getSelfEvaluationFromOneModule from "../../../../logic/marks/getSelfEvaluationFromOneModule";
 import getTeacherEvaluationFromOneModule from "../../../../logic/marks/getTeacherEvaluationFromOneModule";
-import CalificationsModule from "@/app/components/modules/CalificationsModule";
-import SelfEvaluationModule from "@/app/components/modules/SelfEvaluationModule";
+import CalificationsModule from "@/components/modules/CalificationsModule";
+import SelfEvaluationModule from "@/components/modules/SelfEvaluationModule";
 import getAspects from "../../../../logic/aspects/getAspects";
 
 export default function ModuloPage() {
@@ -79,15 +79,15 @@ export default function ModuloPage() {
 
   return (
     <main className="pt-16">
-      <div className="flex flex-row bg-[var(--primary)] fixed top-16">
+      <div className="flex flex-row justify-between items-center bg-[var(--primary)] fixed top-16 w-full">
         <h2 className="px-2 text-xl my-2 font-bold ">
           {"Módulo " + moduleId + ": " + moduleName}
         </h2>
-        <button onClick={() => router.back()} className="p-2">
+        <button onClick={() => router.back()} className="p-2 pr-4">
           <img
             src="/volver.png"
             alt="Botón de volver"
-            className="w-16 cursor-pointer"
+            className="max-w-12 w-12 cursor-pointer"
           />
         </button>
       </div>

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import Chart from "chart.js/auto";
-import getTeacherComent from "../../../../logic/coments/getTeacherComent";
+import getTeacherComent from "../../../logic/coments/getTeacherComent";
 
 export default function CalificationsModule(props: {
   teacherEvaluation: number[];
