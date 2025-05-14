@@ -65,11 +65,21 @@ export default function MobileMenu() {
       </div>
 
       <ul className="w-screen flex flex-col items-center justify-start mt-16">
+        <li
+          className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-center hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
+          onClick={() => {
+            router.push("/average");
+          }}
+        >
+          <p className="text-2xl font-bold text-center w-fit ">
+            Evaluación media
+          </p>
+        </li>
         {modules.length > 0 &&
           modules.map((oneModule, index) => {
             return (
               <li
-                className="text-black h-fit py-4 px-2 w-screen flex flex-row items-center justify-between hover:bg-[var(--primary)] hover:text-white "
+                className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-between hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
                 key={oneModule.name}
                 onClick={() => {
                   router.push(
@@ -79,7 +89,7 @@ export default function MobileMenu() {
               >
                 <div className="w-12"></div>
                 <p className="text-xl text-center w-fit">{oneModule.name}</p>
-                <div className="w-12 flex flex-row items-start justify-center pr-2">
+                <div className="w-12 flex flex-row items-end justify-center pl-2">
                   {oneModule.selfEvaluation && (
                     <img
                       className="p-0.5 w-5"

@@ -41,11 +41,17 @@ export default function Header() {
         <div className="flex flex-col items-center justify-center ml-auto pl-4">
           {" "}
           {menuIsOpen ? (
-            <button onClick={() => setMenuIsOpen(false)}>
+            <button
+              onClick={() => setMenuIsOpen(false)}
+              className="cursor-pointer"
+            >
               <img className="w-12" src="/equis.png" alt="" />
             </button>
           ) : (
-            <button onClick={() => setMenuIsOpen(true)}>
+            <button
+              onClick={() => setMenuIsOpen(true)}
+              className="cursor-pointer"
+            >
               <img className="w-10" src="/menu.png" alt="" />
             </button>
           )}
@@ -54,13 +60,13 @@ export default function Header() {
       {menuIsOpen && (
         <ul className="bg-white h-screen w-screen fixed z-25 pt-18 flex flex-col justify-start items-center">
           <li
-            className="text-black text-2xl my-3 underline"
+            className="text-black text-2xl my-3 underline cursor-pointer"
             onClick={handleOpenTutorial}
           >
             Tutorial inicial
           </li>
           <li
-            className="text-black text-2xl my-3 underline"
+            className="text-black text-2xl my-3 underline cursor-pointer"
             onClick={handleLogout}
           >
             Cerrar sesión

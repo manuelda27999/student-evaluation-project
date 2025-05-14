@@ -87,14 +87,14 @@ export default function SelfEvaluationModule(props: {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-start justify-start pt-18">
+    <div className="h-full w-full flex flex-col items-start justify-start pt-18">
       <h2 className="text-3xl font-semibold text-black pt-3 pl-3">
         Autoevaluación
       </h2>
-      <div className="w-full h-full flex flex-row items-start bg-white  p-4">
+      <div className="w-full h-full flex flex-row items-start bg-white">
         <form
           action="submit"
-          className="w-full flex flex-col items-center justify-start"
+          className="w-full p-4 flex flex-col items-center justify-start"
           onSubmit={handleSendSelfEvaluation}
         >
           {props.aspects &&
@@ -112,6 +112,7 @@ export default function SelfEvaluationModule(props: {
                       {aspect}
                     </label>
                     <button
+                      className="cursor-pointer"
                       onClick={(event) => {
                         event.preventDefault();
                         handleOpenPopup(aspect, aspectsInformation[index]);
@@ -129,7 +130,7 @@ export default function SelfEvaluationModule(props: {
                     min="1"
                     max="40"
                     id={aspect}
-                    className="w-full"
+                    className="w-full cursor-pointer"
                     value={values[index]}
                     onChange={(e) => {
                       handleChange(index, parseInt(e.target.value));
@@ -151,6 +152,7 @@ export default function SelfEvaluationModule(props: {
                 Comentario
               </label>
               <button
+                className="cursor-pointer"
                 onClick={(event) => {
                   event.preventDefault();
                   handleOpenPopup(
@@ -173,7 +175,7 @@ export default function SelfEvaluationModule(props: {
               className="w-11/12 h-48 border-2 border-gray-500 rounded-md p-2 mx-auto mt-2 text-black"
             ></textarea>
           </div>
-          <button className="bg-[var(--secondary)] text-white rounded-md p-2 mb-4 w-48 font-bold">
+          <button className="bg-[var(--secondary)] text-white rounded-md p-2 mb-4 w-48 font-bold cursor-pointer">
             Enviar autoevaluación
           </button>
         </form>

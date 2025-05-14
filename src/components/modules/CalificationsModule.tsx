@@ -12,6 +12,7 @@ export default function CalificationsModule(props: {
   const [coment, setComent] = useState<string>(
     "El profesor aún no te ha evaluado"
   );
+  const evaluationsNames = ["Nada", "Bajo", "Medio", "Alto", "Destaca"];
 
   /* console.log(props.teacherEvaluation);
   console.log(props.selfEvaluation);
@@ -73,6 +74,17 @@ export default function CalificationsModule(props: {
           plugins: {
             legend: {
               display: true,
+            },
+            tooltip: {
+              callbacks: {
+                label: (tooltipItem) => {
+                  const value = tooltipItem.parsed.r;
+
+                  const label = evaluationsNames[Math.round(value)];
+
+                  return `${tooltipItem.dataset.label}: ${label}`;
+                },
+              },
             },
           },
           scales: {

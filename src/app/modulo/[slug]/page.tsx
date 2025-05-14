@@ -78,7 +78,7 @@ export default function ModuloPage() {
   }, [moduleId]);
 
   return (
-    <main className="pt-16">
+    <main className="w-full pt-16">
       <div className="flex flex-row justify-between items-center bg-[var(--primary)] fixed top-16 w-full">
         <h2 className="px-2 text-xl my-2 font-bold ">
           {"Módulo " + moduleId + ": " + moduleName}
