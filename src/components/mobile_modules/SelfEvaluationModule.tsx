@@ -87,7 +87,7 @@ export default function SelfEvaluationModule(props: {
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-start justify-start pt-18">
+    <div className="h-full w-full flex flex-col items-start justify-start pt-2">
       <h2 className="text-3xl font-semibold text-black pt-3 pl-3">
         Autoevaluación
       </h2>

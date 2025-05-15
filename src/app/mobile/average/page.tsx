@@ -13,9 +13,9 @@ import {
   Legend,
 } from "chart.js";
 
-import getAverageSelfEvaluation from "../../../logic/marks/getAverageSelfEvaluation";
-import getAverageTeacherEvaluation from "../../../logic/marks/getAverageTeacherEvaluation";
-import getModules from "../../../logic/modules/getModules";
+import getAverageSelfEvaluation from "../../../../logic/marks/getAverageSelfEvaluation";
+import getAverageTeacherEvaluation from "../../../../logic/marks/getAverageTeacherEvaluation";
+import getModules from "../../../../logic/modules/getModules";
 
 interface Module {
   name: string;
@@ -63,9 +63,6 @@ export default function AverageCalification() {
     courseId: string
   ) => {
     try {
-      const userId = sessionStorage.getItem("userId");
-      const courseId = sessionStorage.getItem("courseId");
-
       if (userId !== null && courseId !== null) {
         const teacherAverage = await getAverageTeacherEvaluation(
           userId,
@@ -186,7 +183,7 @@ export default function AverageCalification() {
   }, [modules.length]);
 
   return (
-    <main className="w-full h-full flex flex-col justify-start items-center pt-34 px-2">
+    <div className="w-full h-full flex flex-col justify-start items-center pt-18 px-2">
       <div className="flex flex-row justify-between items-center bg-[var(--primary)] fixed top-16 w-full">
         <h2 className="px-2 text-xl my-2 font-bold ">
           Evaluación media del curso
@@ -225,6 +222,6 @@ export default function AverageCalification() {
             ]}
         </p>
       </div>
-    </main>
+    </div>
   );
 }

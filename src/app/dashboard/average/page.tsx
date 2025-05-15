@@ -13,9 +13,9 @@ import {
   Legend,
 } from "chart.js";
 
-import getAverageSelfEvaluation from "../../../logic/marks/getAverageSelfEvaluation";
-import getAverageTeacherEvaluation from "../../../logic/marks/getAverageTeacherEvaluation";
-import getModules from "../../../logic/modules/getModules";
+import getAverageSelfEvaluation from "../../../../logic/marks/getAverageSelfEvaluation";
+import getAverageTeacherEvaluation from "../../../../logic/marks/getAverageTeacherEvaluation";
+import getModules from "../../../../logic/modules/getModules";
 
 interface Module {
   name: string;
@@ -33,7 +33,6 @@ export default function AverageEvaluationDesktop() {
     Tooltip,
     Legend
   );
-  const router = useRouter();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { usePopup } from "@/context/PopupContext";
+import { useRouter } from "next/navigation";
 import getModules from "../../../logic/modules/getModules";
 import getNameOfCourse from "../../../logic/courses/getNameOfCourse";
 
@@ -20,8 +21,9 @@ interface DesktopMenuProps {
   changeToAverage: () => void;
 }
 
-export default function CalificationsModuleMobile(props: DesktopMenuProps) {
+export default function DesktopMenu() {
   const { openPopup } = usePopup();
+  const router = useRouter();
 
   const [courseName, setCourseName] = useState<string | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
@@ -67,15 +69,15 @@ export default function CalificationsModuleMobile(props: DesktopMenuProps) {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-start bg-white border-r-4 border-[var(--primary)]">
-      <div className="bg-[var(--primary)] w-full py-4 h-16 flex flex-row items-center justify-center">
-        <h1 className=" text-2xl text-white font-bold">{courseName}</h1>
+      <div className="relative w-full bg-[var(--primary)] py-4 h-16 flex flex-row items-center justify-center">
+        <h1 className="text-2xl text-white font-bold">{courseName}</h1>
       </div>
 
       <ul className="w-full flex flex-col items-center justify-start">
         <li
           className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-center hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
           onClick={() => {
-            props.changeToAverage();
+            router.push("/dashboard/average");
           }}
         >
           <p className="text-2xl font-bold text-center w-fit ">
@@ -89,10 +91,10 @@ export default function CalificationsModuleMobile(props: DesktopMenuProps) {
                 className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-between hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
                 key={oneModule.name}
                 onClick={() => {
-                  props.changeModule(
-                    index,
-                    oneModule.name,
-                    oneModule.selfEvaluation
+                  router.push(
+                    `/dashboard/modulo/${index}?moduleName=${encodeURIComponent(
+                      oneModule.name
+                    )}`
                   );
                 }}
               >

@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
-import getModules from "../../logic/modules/getModules";
-import getNameOfCourse from "../../logic/courses/getNameOfCourse";
+import getModules from "../../../../logic/modules/getModules";
+import getNameOfCourse from "../../../../logic/courses/getNameOfCourse";
 
 interface Module {
   name: string;
@@ -59,16 +59,16 @@ export default function MobileMenu() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start bg-white">
+    <div className=" h-full flex flex-col items-center justify-start bg-white">
       <div className="bg-[var(--primary)] w-full h-16 flex flex-row items-center justify-center fixed top-16">
         <h1 className=" text-2xl text-white font-bold">{courseName}</h1>
       </div>
 
       <ul className="w-full flex flex-col items-center justify-start mt-16">
         <li
-          className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-center hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
+          className="text-black h-fit py-4 px-2 flex flex-row items-center justify-center hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
           onClick={() => {
-            router.push("/average");
+            router.push("/mobile/average");
           }}
         >
           <p className="text-2xl font-bold text-center w-fit ">
@@ -83,7 +83,7 @@ export default function MobileMenu() {
                 key={oneModule.name}
                 onClick={() => {
                   router.push(
-                    `/modulo/${index}?moduleName=${modules[index].name}`
+                    `/mobile/modulo/${index}?moduleName=${modules[index].name}`
                   );
                 }}
               >

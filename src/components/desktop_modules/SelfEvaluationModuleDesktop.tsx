@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
 import createMark from "../../../logic/marks/createMark";
 import createComentFromStudentToTeachers from "../../../logic/coments/createComentFromStudentToTeacher";
@@ -7,9 +6,8 @@ import getAspects from "../../../logic/aspects/getAspects";
 
 export default function SelfEvaluationModuleDesktop(props: {
   moduleId: number;
-  moduleName: string;
+  aspects: string[];
 }) {
-  const router = useRouter();
   const { openPopup } = usePopup();
 
   const [values, setValues] = useState([0, 0, 0, 0, 0]);
@@ -97,7 +95,8 @@ export default function SelfEvaluationModuleDesktop(props: {
         userId
       );
 
-      router.push("/");
+      debugger;
+      window.location.reload();
     } catch (error) {
       console.error("Error sending self evaluation:", error);
     }

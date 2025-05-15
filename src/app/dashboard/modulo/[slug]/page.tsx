@@ -2,11 +2,11 @@
 
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import getSelfEvaluationFromOneModule from "../../../../logic/marks/getSelfEvaluationFromOneModule";
-import getTeacherEvaluationFromOneModule from "../../../../logic/marks/getTeacherEvaluationFromOneModule";
-import CalificationsModule from "@/components/mobile_modules/CalificationsModule";
-import SelfEvaluationModule from "@/components/mobile_modules/SelfEvaluationModule";
-import getAspects from "../../../../logic/aspects/getAspects";
+import getSelfEvaluationFromOneModule from "../../../../../logic/marks/getSelfEvaluationFromOneModule";
+import getTeacherEvaluationFromOneModule from "../../../../../logic/marks/getTeacherEvaluationFromOneModule";
+import getAspects from "../../../../../logic/aspects/getAspects";
+import SelfEvaluationModuleDesktop from "@/components/desktop_modules/SelfEvaluationModuleDesktop";
+import CalificationsModuleDesktop from "@/components/desktop_modules/CalificationsModuleDesktop";
 
 export default function ModuloPage() {
   const params = useParams();
@@ -15,8 +15,10 @@ export default function ModuloPage() {
   const moduleName = searchParams.get("moduleName") as string;
   const router = useRouter();
 
-  const [selfEvaluation, setSelfEvaluation] = useState<number[]>([]);
-  const [teacherEvaluation, setTeacherEvaluation] = useState<number[]>([]);
+  const [selfEvaluation, setSelfEvaluation] = useState<number[] | null>(null);
+  const [teacherEvaluation, setTeacherEvaluation] = useState<number[] | null>(
+    null
+  );
   const [aspects, setAspects] = useState<string[]>([]);
 
   /* console.log(selfEvaluation);
@@ -78,9 +80,9 @@ export default function ModuloPage() {
   }, [moduleId]);
 
   return (
-    <main className="w-full pt-16">
-      <div className="flex flex-row justify-between items-center bg-[var(--primary)] fixed top-16 w-full">
-        <h2 className="px-2 text-xl my-2 font-bold ">
+    <main className="w-full h-full">
+      <div className="flex flex-row justify-between items-center text-[var(--primary)] realtive w-full">
+        <h2 className="px-4 text-2xl my-2 font-bold ">
           {"Módulo " + moduleId + ": " + moduleName}
         </h2>
         <button onClick={() => router.back()} className="p-2 pr-4">
@@ -91,16 +93,22 @@ export default function ModuloPage() {
           />
         </button>
       </div>
-      {selfEvaluation.length === 0 ? (
-        <SelfEvaluationModule aspects={aspects} moduleId={Number(moduleId)} />
-      ) : (
-        <CalificationsModule
-          teacherEvaluation={teacherEvaluation}
-          selfEvaluation={selfEvaluation}
+      {selfEvaluation !== null && selfEvaluation.length === 0 && (
+        <SelfEvaluationModuleDesktop
           aspects={aspects}
           moduleId={Number(moduleId)}
         />
-      )}
+      )}{" "}
+      {selfEvaluation !== null &&
+        teacherEvaluation !== null &&
+        selfEvaluation.length > 0 && (
+          <CalificationsModuleDesktop
+            teacherEvaluation={teacherEvaluation}
+            selfEvaluation={selfEvaluation}
+            aspects={aspects}
+            moduleId={Number(moduleId)}
+          />
+        )}
     </main>
   );
 }
