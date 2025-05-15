@@ -4,8 +4,8 @@ import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import getSelfEvaluationFromOneModule from "../../../../logic/marks/getSelfEvaluationFromOneModule";
 import getTeacherEvaluationFromOneModule from "../../../../logic/marks/getTeacherEvaluationFromOneModule";
-import CalificationsModule from "@/components/modules/CalificationsModule";
-import SelfEvaluationModule from "@/components/modules/SelfEvaluationModule";
+import CalificationsModule from "@/components/mobile_modules/CalificationsModule";
+import SelfEvaluationModule from "@/components/mobile_modules/SelfEvaluationModule";
 import getAspects from "../../../../logic/aspects/getAspects";
 
 export default function ModuloPage() {

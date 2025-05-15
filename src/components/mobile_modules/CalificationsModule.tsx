@@ -115,9 +115,9 @@ export default function CalificationsModule(props: {
     <div className="w-full h-full flex flex-col items-start justify-baseline pt-20">
       <canvas
         ref={canvasRef}
-        className="md:max-w-1/2 md:max-h-6/12 w-full h-64"
+        className="md:max-w-1/2 md:max-h-6/12 w-full h-40"
       ></canvas>
-      <div className="w-full flex flex-col items-center justify-start mt-10">
+      <div className="w-full flex flex-col items-center justify-start pb-4">
         <h3 className="text-black text-2xl font-bold w-3/4 mb-2 ">
           Comentarios del profesor
         </h3>

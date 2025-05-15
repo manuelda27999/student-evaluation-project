@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
-import getModules from "../../logic/modules/getModules";
-import getNameOfCourse from "../../logic/courses/getNameOfCourse";
+import getModules from "../../../logic/modules/getModules";
+import getNameOfCourse from "../../../logic/courses/getNameOfCourse";
 
 interface Module {
   name: string;
@@ -12,8 +11,16 @@ interface Module {
   teacherEvaluation: boolean;
 }
 
-export default function MobileMenu() {
-  const router = useRouter();
+interface DesktopMenuProps {
+  changeModule: (
+    index: number,
+    nameModule: string,
+    selfEvaluationDone: boolean
+  ) => void;
+  changeToAverage: () => void;
+}
+
+export default function CalificationsModuleMobile(props: DesktopMenuProps) {
   const { openPopup } = usePopup();
 
   const [courseName, setCourseName] = useState<string | null>(null);
@@ -59,16 +66,16 @@ export default function MobileMenu() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start bg-white">
-      <div className="bg-[var(--primary)] w-full h-16 flex flex-row items-center justify-center fixed top-16">
+    <div className="w-full h-full flex flex-col items-center justify-start bg-white border-r-4 border-[var(--primary)]">
+      <div className="bg-[var(--primary)] w-full py-4 h-16 flex flex-row items-center justify-center">
         <h1 className=" text-2xl text-white font-bold">{courseName}</h1>
       </div>
 
-      <ul className="w-full flex flex-col items-center justify-start mt-16">
+      <ul className="w-full flex flex-col items-center justify-start">
         <li
           className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-center hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
           onClick={() => {
-            router.push("/average");
+            props.changeToAverage();
           }}
         >
           <p className="text-2xl font-bold text-center w-fit ">
@@ -82,8 +89,10 @@ export default function MobileMenu() {
                 className="text-black h-fit py-4 px-2 w-full flex flex-row items-center justify-between hover:bg-[var(--secondary)] hover:text-white cursor-pointer"
                 key={oneModule.name}
                 onClick={() => {
-                  router.push(
-                    `/modulo/${index}?moduleName=${modules[index].name}`
+                  props.changeModule(
+                    index,
+                    oneModule.name,
+                    oneModule.selfEvaluation
                   );
                 }}
               >

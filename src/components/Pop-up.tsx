@@ -13,7 +13,7 @@ export default function Popup() {
 
       <div className="relative bg-white rounded-lg w-11/12 p-6 max-w-md shadow-lg text-black">
         <button
-          className="absolute top-2 right-3 text-4xl font-bold text-gray-600 hover:text-black"
+          className="absolute top-2 right-3 text-4xl font-bold text-gray-600 hover:text-black cursor-pointer"
           onClick={closePopup}
           aria-label="Cerrar"
         >
