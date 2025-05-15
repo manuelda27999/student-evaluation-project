@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/credentials";
 
 const getNameOfCourse = async (courseId: string) => {

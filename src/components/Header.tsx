@@ -22,6 +22,7 @@ export default function Header() {
     try {
       logoutUser().then(() => {
         sessionStorage.removeItem("userId");
+        sessionStorage.removeItem("courseId");
         route.push("/login");
       });
     } catch (error) {
