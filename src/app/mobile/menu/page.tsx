@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
-import getModules from "../../../../logic/modules/getModules";
+import getModules from "../../../../logic/course-modules/getModules";
 import getNameOfCourse from "../../../../logic/courses/getNameOfCourse";
 
 interface Module {

@@ -15,7 +15,7 @@ import {
 
 import getAverageSelfEvaluation from "../../../../logic/marks/getAverageSelfEvaluation";
 import getAverageTeacherEvaluation from "../../../../logic/marks/getAverageTeacherEvaluation";
-import getModules from "../../../../logic/modules/getModules";
+import getModules from "../../../../logic/course-modules/getModules";
 
 interface Module {
   name: string;

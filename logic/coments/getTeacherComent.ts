@@ -1,11 +1,27 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/credentials";
 
+type Coment = {
+  course: string;
+  from: string;
+  module: string;
+  text: string;
+};
+
 const getTeacherComent = async (
   userId: string,
   courseId: string,
   moduleId: number
 ) => {
+  if (typeof userId !== "string" || userId.trim().length < 6)
+    throw new Error("Invalid user ID.");
+
+  if (typeof courseId !== "string" || courseId.trim().length < 6)
+    throw new Error("Invalid course ID.");
+
+  if (typeof moduleId !== "number" || moduleId < 0)
+    throw new Error("Invalid module ID.");
+
   try {
     const userRef = doc(db, "users", userId);
     const userSnap = await getDoc(userRef);
@@ -14,7 +30,7 @@ const getTeacherComent = async (
       throw new Error("User does not exist");
     }
 
-    const coments = userSnap.data()?.coments || [];
+    const { coments } = userSnap.data() as { coments: Coment[] };
 
     const teacherComent = coments.find(
       (coment: any) =>
@@ -26,10 +42,13 @@ const getTeacherComent = async (
       throw new Error("Teacher coment not found");
     }
 
-    return teacherComent.text;
-  } catch (error) {
-    console.error("Error getting own coment:", error);
-    throw error;
+    return { coment: teacherComent.text };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+
+    throw new Error("An unknown error occurred while creating the comment.");
   }
 };
 

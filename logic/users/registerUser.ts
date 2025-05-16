@@ -1,6 +1,12 @@
 import { createUserWithEmailAndPassword, deleteUser } from "@firebase/auth";
 import { auth, db } from "../../firebase/credentials";
-import { doc, setDoc, getDoc } from "@firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+} from "@firebase/firestore";
 
 const registerUser = async (
   name: string,
@@ -51,6 +57,10 @@ const registerUser = async (
         marks: [],
         coments: [],
         courses: [courseRef],
+      });
+
+      await updateDoc(courseRef, {
+        students: arrayUnion(doc(db, "users", user.uid)),
       });
     } catch (error) {
       await deleteUser(user);

@@ -6,8 +6,8 @@ const moduleId = 1;
 
 const handleGetTeacherComent = async () => {
   try {
-    const coment = await getTeacherComent(userId, courseId, moduleId);
-    console.log("Coment retrieved successfully:", coment);
+    const response = await getTeacherComent(userId, courseId, moduleId);
+    console.log("Coment retrieved successfully:", response);
   } catch (error) {
     console.error("Error getting teacher coment:", error);
   }
