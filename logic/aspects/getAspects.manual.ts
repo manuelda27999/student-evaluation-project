@@ -1,6 +1,6 @@
 import getAspects from "./getAspects";
 
-const courseId = "uytEidnU3GVsyhNcpbmc"; // Replace with the actual course ID
+const courseId = "uytEidnU3GVsyhNcpbmc";
 
 const handleGetAspects = async () => {
   try {

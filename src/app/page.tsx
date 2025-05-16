@@ -20,11 +20,11 @@ export default function Home() {
     const userId = sessionStorage.getItem("userId");
 
     if (userId) {
-      handlGetCourses(userId);
+      handleGetCourses(userId);
     }
   }, []);
 
-  const handlGetCourses = async (userId: string) => {
+  const handleGetCourses = async (userId: string) => {
     try {
       const result = await getCoursesFromStudent(userId);
       setCourses(result);
