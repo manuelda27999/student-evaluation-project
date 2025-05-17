@@ -151,7 +151,3 @@ _Note: fields typed as `DocumentReference<T>` are Firestore references._
   ```bash
   npm test
   ```
-
-- **Manual/integration scripts**:
-  - `scripts/seedCourses.ts` — seed sample course data
-  - `scripts/manualTests.ts` — run smoke checks against Firestore
