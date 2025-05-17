@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #071E40;
+  --foreground: #ffffff;
+  --secondary: #54BCB7; 
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #071E40;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  primary: var(--primary);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* @keyframes slide-hint {
+  0% {
+    transform: translateX(0)
+  }
+  25% {
+    transform: translateX(6px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-hint {
+  animation: slide-hint 1.5s ease-in-out;
+} */

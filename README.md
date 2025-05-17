@@ -1,40 +1,91 @@
-# Student-evaluation-project
+# Student Evaluation Project
 
 ![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXRhdHZpeWM5YTJhbHRlNGh0czN1NWVkenF5bmN2ZDhwamZ6MGdydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gKNRbXNnXWoPaXAKnF/giphy.gif)
 
-## Intro
+A Next.js application for managing student evaluations, grades, and feedback. This project enables students to view and evaluate their performance across modules, allows teachers to grade and comment on student work, and provides administrators with tools to manage courses and modules.
 
-Student Evaluation is a project created to share students’ grades for their different modules and to allow them to evaluate their teachers as well.
+## Table of Contents
 
-## Functional Description
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [UI Design](#ui-design)
+- [Running the App](#running-the-app)
+- [Data Model](#data-model)
+- [Testing](#testing)
 
-This project will allow the students check their scoring, evaluate theirself and evaluate the teachers.
+## Features
 
-### Use Cases
+- **Student Portal**:
 
-#### For students
+  - List enrolled modules
+  - View grades and overall average
+  - Self-evaluate by module
+  - View teacher comments
 
-- List the modules
-- Evaluate theirself in each module
-- View the marks of each module and the average of the entire curse
-- Evaluate the teachers
-- Read the coments of the teacher in each module
-- Change the password of the profile
+- **Teacher Portal**: (in process)
 
-#### For teachers
+  - List students and modules
+  - Grade students per module and aspect
+  - Provide text feedback to students
+  - View student evaluations of teachers
 
-- List the students
-- List the modules
-- Evaluate each student in each module
-- Write a coment to the students in each module
-- View students grades for each module
-- View the grade the students have given to the teacher
-- Change the password of the profile
+- **Administrator Portal**: (in process)
+  - Create and manage courses
+  - Create and manage modules and aspects
+  - Generate login links for new users
 
-#### For administrator
+## Getting Started
 
-- Create new modules
-- Create the links to log in the profile
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- A Firebase project with Firestore enabled
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-org/student-evaluation-project.git
+   cd student-evaluation-project
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+### Configuration
+
+1. Copy the example environment file and fill in your Firebase credentials:
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Edit `.env.local`:
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-auth-domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+   # etc.
+   ```
+
+## Running the App
+
+Start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## UI Design
 
@@ -42,47 +93,61 @@ link to [Figma](https://www.figma.com/design/Xto9rwGVgNFYiX65gXrPnD/Student-eval
 
 ## Data Model
 
-User
+_Note: fields typed as `DocumentReference<T>` are Firestore references._
 
-- id (uid, required, unique)
-- name (string, required)
-- password (string)
-- role (string, required, enum:["student", "teacher", "administrator"])
-- course (uid, ref Course)
+**User**
 
-Course
+- `id` (`string`, unique, required)
+- `name` (`string`, required)
+- `password` (`string`, required)
+- `role` (`"student" | "teacher" | "administrator"`, required)
+- `courses` (`DocumentReference<Course>[]`, required) — enrolled course references.
+- `comments` (`DocumentReference<Comment>[]`, required) — comment references.
 
-- id (uid, required, unique)
-- name (string, required)
+**Course**
 
-Module
+- `id` (`string`, unique, required)
+- `name` (`string`, required)
+- `modules` (`CourseModule[]`, required) — embedded modules, each with:
+  - `name` (`string`, required)
+- `aspects` (`CourseAspect[]`, required) — embedded aspects, each with:
+  - `name` (`string`, required)
+- `students` (`DocumentReference<User>[]`, required) — enrolled student references.
+- `teachers` (`DocumentReference<User>[]`, required) — assigned teacher references.
 
-- id (uid, required, unique)
-- name (string, required)
-- course (uid, ref Course)
+**Module**
 
-Aspect
+- `id` (`number`, unique, require)
+- `name` (string, require)
 
-- id (uid, required, unique)
-- name (string, required)
-- course (uid, ref Course)
-- ordinal (number, required)
+**Aspect**
 
-Mark
+- `id` (`number`, unique, require)
+- `name` (string, require)
 
-- id (uid, required, unique)
-- from (uid, ref User, required)
-- to (uid, ref User, required)
-- course (uid, ref Course, required)
-- module (uid, ref Module, required)
-- aspect (uid, ref Aspect, required)
-- score (number)
+**Mark**
 
-Comment
+- `id` (`number`, unique, required)
+- `from` (`DocumentReference<User>`, required)
+- `to` (`DocumentReference<User>`, required)
+- `course` (`DocumentReference<Course>`, required)
+- `module` (`DocumentReference<Module>`, required)
+- `text` (`string`, required)
 
-- id (uid, required, unique)
-- from (uid, ref User, required)
-- to (uid, ref User, required)
-- course (uid, red Module, required)
-- module (uid, ref Module, required)
-- text (string, required)
+**Comment**
+
+- `id` (`number`, unique, require)
+- `from` (`DocumentReference<User>`, required)
+- `to` (`DocumentReference<User>`, required)
+- `course` (`DocumentReference<Course>`, required)
+- `module` (`DocumentReference<Module>`, required)
+- `text` (`string`, require)
+
+## Testing
+
+- **Unit Tests** (in progress)  
+  The unit test suite is currently under development. You can run existing tests as they become available:
+
+  ```bash
+  npm test
+  ```
