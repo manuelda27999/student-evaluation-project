@@ -1,6 +1,6 @@
 import createCourse from "./createCourse";
 
-const courseName = "Civerseguridad";
+const courseName = "Civerseguridad 2";
 const teachers = ["ws2eKMxmbGUmZGztQvpeKN2qFF12"];
 
 const handleCreateCourse = async () => {

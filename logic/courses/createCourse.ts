@@ -8,7 +8,23 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/credentials";
 
-const createCourse = async (courseName: string, teachers: string[]) => {
+interface CreateCourseResult {
+  id: string;
+}
+
+/**
+ * Creates a new course in Firestore, ensuring uniqueness and atomic operation.
+ *
+ * @param courseName the name of the course; must be at least 3 characters.
+ * @param teachers an array of teacher user IDs to assign.
+ * @throws {Error} If validation fails or the Firestore operation fails.
+ * @returns {Promise<CreateCourseResult>} the ID of the newly created course.
+ */
+
+const createCourse = async (
+  courseName: string,
+  teachers: string[]
+): Promise<CreateCourseResult> => {
   if (typeof courseName !== "string" || courseName.trim().length < 3)
     throw new Error("Course name must be at least 3 characters.");
 

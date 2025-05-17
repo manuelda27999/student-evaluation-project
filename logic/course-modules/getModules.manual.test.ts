@@ -5,9 +5,9 @@ const courseId = "uytEidnU3GVsyhNcpbmc";
 
 const handleGetModules = async () => {
   try {
-    const modules = await getModules(userId, courseId);
+    const response = await getModules(userId, courseId);
 
-    console.log("Modules:", modules);
+    console.log("Modules created successfully:", response);
   } catch (error) {
     console.error("Error getting modules:", error);
   }
