@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
 import createMark from "../../../logic/marks/createMark";
 import createComentFromStudentToTeachers from "../../../logic/coments/createComentFromStudentToTeacher";
+import Image from "next/image";
 
 export default function SelfEvaluationModule(props: {
   aspects: string[];
@@ -118,7 +119,9 @@ export default function SelfEvaluationModule(props: {
                         handleOpenPopup(aspect, aspectsInformation[index]);
                       }}
                     >
-                      <img
+                      <Image
+                        width={16}
+                        height={16}
                         src="/informacion.png"
                         alt="Botón de información"
                         className="w-4 pb-4"
@@ -161,7 +164,9 @@ export default function SelfEvaluationModule(props: {
                   );
                 }}
               >
-                <img
+                <Image
+                  width={16}
+                  height={16}
                   src="/informacion.png"
                   alt="Botón de información"
                   className="w-4 pb-2"

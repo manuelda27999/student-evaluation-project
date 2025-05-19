@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 export default function useAuthRedirect() {
   const router = useRouter();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {

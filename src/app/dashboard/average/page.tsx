@@ -1,7 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import {
   Chart,
   BarController,
@@ -39,7 +38,10 @@ export default function AverageEvaluationDesktop() {
   const [selfAverage, setSelfAverage] = useState<number[]>([]);
   const [teacherAverage, setTeacherAverage] = useState<number[]>([]);
   const [modules, setModules] = useState<string[]>([]);
-  const evaluationsNames = ["Nada", "Bajo", "Medio", "Alto", "Destaca"];
+  const evaluationsNames = useMemo(
+    () => ["Nada", "Bajo", "Medio", "Alto", "Destaca"],
+    []
+  );
 
   /* console.log(selfAverage);
   console.log(teacherAverage);
@@ -62,9 +64,6 @@ export default function AverageEvaluationDesktop() {
     courseId: string
   ) => {
     try {
-      const userId = sessionStorage.getItem("userId");
-      const courseId = sessionStorage.getItem("courseId");
-
       if (userId !== null && courseId !== null) {
         const teacherAverage = await getAverageTeacherEvaluation(
           userId,
@@ -77,27 +76,29 @@ export default function AverageEvaluationDesktop() {
     }
   };
 
-  const handleGetModules = async (course: string) => {
-    try {
-      const userId = sessionStorage.getItem("userId");
+  const handleGetModules = useCallback(
+    async (course: string) => {
+      try {
+        const userId = sessionStorage.getItem("userId");
 
-      if (typeof userId === "string") {
-        const modules = await getModules(userId, course);
+        if (typeof userId === "string") {
+          const modulesData = await getModules(userId, course);
+          const formatModules: string[] = [];
 
-        const formatModules: string[] = [];
+          modulesData.forEach((module: Module, index: number) => {
+            if (selfAverage[index] || teacherAverage[index]) {
+              formatModules.push(module.name);
+            }
+          });
 
-        modules.forEach((module: Module, index: number) => {
-          if (selfAverage[index] || teacherAverage[index]) {
-            formatModules.push(module.name);
-          }
-        });
-
-        setModules(formatModules);
+          setModules(formatModules);
+        }
+      } catch (error) {
+        console.error("Error getting modules:", error);
       }
-    } catch (error) {
-      console.error("Error getting modules:", error);
-    }
-  };
+    },
+    [selfAverage, teacherAverage]
+  );
 
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
@@ -108,8 +109,9 @@ export default function AverageEvaluationDesktop() {
       handleGetAverageTeacherEvaluation(userId, courseId);
       handleGetModules(courseId);
     }
-  }, [selfAverage.length, teacherAverage.length]);
+  }, [handleGetModules]);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (canvasRef.current != null) {
       const context = canvasRef.current;
@@ -182,7 +184,12 @@ export default function AverageEvaluationDesktop() {
         chartInstance.destroy();
       };
     }
-  }, [modules.length]);
+  }, [
+    evaluationsNames,
+    modules.length,
+    selfAverage.length,
+    teacherAverage.length,
+  ]);
 
   return (
     <main className="w-full h-full flex flex-col justify-start items-center">

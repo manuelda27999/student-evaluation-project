@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import {
   Chart,
   BarController,
@@ -16,6 +16,7 @@ import {
 import getAverageSelfEvaluation from "../../../../logic/marks/getAverageSelfEvaluation";
 import getAverageTeacherEvaluation from "../../../../logic/marks/getAverageTeacherEvaluation";
 import getModules from "../../../../logic/course-modules/getModules";
+import Image from "next/image";
 
 interface Module {
   name: string;
@@ -40,11 +41,13 @@ export default function AverageCalification() {
   const [selfAverage, setSelfAverage] = useState<number[]>([]);
   const [teacherAverage, setTeacherAverage] = useState<number[]>([]);
   const [modules, setModules] = useState<string[]>([]);
-  const evaluationsNames = ["Nada", "Bajo", "Medio", "Alto", "Destaca"];
-
-  console.log(selfAverage);
+  const evaluationsNames = useMemo(
+    () => ["Nada", "Bajo", "Medio", "Alto", "Destaca"],
+    []
+  );
+  /* console.log(selfAverage);
   console.log(teacherAverage);
-  console.log(modules);
+  console.log(modules); */
 
   const handleGetAverageSelfEvaluation = async (
     userId: string,
@@ -97,6 +100,7 @@ export default function AverageCalification() {
     }
   };
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     const courseId = sessionStorage.getItem("courseId");
@@ -108,6 +112,7 @@ export default function AverageCalification() {
     }
   }, [selfAverage.length, teacherAverage.length]);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (canvasRef.current != null) {
       const context = canvasRef.current;
@@ -189,7 +194,9 @@ export default function AverageCalification() {
           Evaluación media del curso
         </h2>
         <button onClick={() => router.back()} className="p-2 pr-4">
-          <img
+          <Image
+            width={48}
+            height={48}
             src="/volver.png"
             alt="Botón de volver"
             className="max-w-12 w-12 cursor-pointer"

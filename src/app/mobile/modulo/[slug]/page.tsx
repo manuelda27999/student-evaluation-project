@@ -7,6 +7,7 @@ import getTeacherEvaluationFromOneModule from "../../../../../logic/marks/getTea
 import CalificationsModule from "@/components/mobile_modules/CalificationsModule";
 import SelfEvaluationModule from "@/components/mobile_modules/SelfEvaluationModule";
 import getAspects from "../../../../../logic/aspects/getAspects";
+import Image from "next/image";
 
 export default function ModuloPage() {
   const params = useParams();
@@ -84,7 +85,9 @@ export default function ModuloPage() {
           {"Módulo " + moduleId + ": " + moduleName}
         </h2>
         <button onClick={() => router.back()} className="p-2 pr-4">
-          <img
+          <Image
+            width={48}
+            height={48}
             src="/volver.png"
             alt="Botón de volver"
             className="max-w-12 w-12 cursor-pointer"

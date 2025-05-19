@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { usePopup } from "@/context/PopupContext";
 import getModules from "../../../../logic/course-modules/getModules";
 import getNameOfCourse from "../../../../logic/courses/getNameOfCourse";
+import Image from "next/image";
 
 interface Module {
   name: string;
@@ -42,6 +43,7 @@ export default function MobileMenu() {
     }
   };
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const courseId = sessionStorage.getItem("courseId") as string;
 
@@ -91,18 +93,22 @@ export default function MobileMenu() {
                 <p className="text-xl text-center w-fit">{oneModule.name}</p>
                 <div className="w-12 flex flex-row items-end justify-center pl-2">
                   {oneModule.selfEvaluation && (
-                    <img
+                    <Image
+                      width={20}
+                      height={20}
                       className="p-0.5 w-5"
                       src="/check.png"
                       alt="Imagen que verifica con un tick que la autoevaluación ha sido realizada"
-                    ></img>
+                    ></Image>
                   )}
                   {oneModule.teacherEvaluation && (
-                    <img
+                    <Image
+                      width={20}
+                      height={20}
                       src="/check.png"
                       className="p-0.5 w-5"
                       alt="Imagen que verifica con un tick que la evaluación del profesor ha sido realizada"
-                    ></img>
+                    ></Image>
                   )}
                 </div>
               </li>
