@@ -1,9 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import getTeacherComent from "../../../logic/coments/getTeacherComent";
-import getSelfEvaluationFromOneModule from "../../../logic/marks/getSelfEvaluationFromOneModule";
-import getTeacherEvaluationFromOneModule from "../../../logic/marks/getTeacherEvaluationFromOneModule";
-import getAspects from "../../../logic/aspects/getAspects";
 
 export default function CalificationsModuleDesktop(props: {
   teacherEvaluation: number[];
@@ -29,8 +26,8 @@ export default function CalificationsModuleDesktop(props: {
     moduleId: number
   ) => {
     try {
-      const teacherComent = await getTeacherComent(userId, courseId, moduleId);
-      setComent(teacherComent);
+      const response = await getTeacherComent(userId, courseId, moduleId);
+      setComent(response.coment);
     } catch (error) {
       console.error("Error getting teacher coment:", error);
     }
@@ -45,6 +42,7 @@ export default function CalificationsModuleDesktop(props: {
     }
   }, [props.moduleId]);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (canvasRef.current != null) {
       const context = canvasRef.current;

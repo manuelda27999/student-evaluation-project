@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePopup } from "@/context/PopupContext";
 import logoutUser from "../../logic/users/logoutUser";
+import Image from "next/image";
 
 export default function Header() {
   const route = useRouter();
@@ -33,7 +34,9 @@ export default function Header() {
   return (
     <header className="w-screen">
       <div className="flex items-center w-full h-16 px-4 fixed bg-[var(--secondary)] z-50">
-        <img
+        <Image
+          width={150}
+          height={40}
           src="/logoHeader.png"
           alt="Logo de Eurofirms University"
           className="h-10 mr-4"
@@ -46,14 +49,26 @@ export default function Header() {
               onClick={() => setMenuIsOpen(false)}
               className="cursor-pointer"
             >
-              <img className="w-12" src="/equis.png" alt="" />
+              <Image
+                width={40}
+                height={40}
+                className="w-12"
+                src="/equis.png"
+                alt=""
+              />
             </button>
           ) : (
             <button
               onClick={() => setMenuIsOpen(true)}
               className="cursor-pointer"
             >
-              <img className="w-10" src="/menu.png" alt="" />
+              <Image
+                width={40}
+                height={40}
+                className="w-10"
+                src="/menu.png"
+                alt=""
+              />
             </button>
           )}
         </div>

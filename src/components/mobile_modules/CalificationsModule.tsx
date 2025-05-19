@@ -24,13 +24,14 @@ export default function CalificationsModule(props: {
     moduleId: number
   ) => {
     try {
-      const teacherComent = await getTeacherComent(userId, courseId, moduleId);
-      setComent(teacherComent);
+      const response = await getTeacherComent(userId, courseId, moduleId);
+      setComent(response.coment);
     } catch (error) {
       console.error("Error getting teacher coment:", error);
     }
   };
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     const courseId = sessionStorage.getItem("courseId");

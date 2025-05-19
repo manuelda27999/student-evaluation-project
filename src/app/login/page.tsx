@@ -3,6 +3,7 @@
 import loginUser from "../../../logic/users/loginUser";
 import useAuthRedirect from "@/lib/useAuthRedirect";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Login() {
   useAuthRedirect();
@@ -19,8 +20,8 @@ export default function Login() {
     try {
       loginUser(username, password).then((userCredential) => {
         if (userCredential) {
-          console.log("Credenciales del usuario: ");
-          console.log(userCredential?.uid);
+          /* console.log("Credenciales del usuario: ");
+          console.log(userCredential?.uid); */
 
           sessionStorage.setItem("userId", userCredential?.uid);
           route.push("/");
@@ -34,8 +35,10 @@ export default function Login() {
   return (
     <div className="flex flex-col items-center justify-start h-screen w-screen bg-primary">
       <header className="flex items-center w-screen p-4 justify-between md:justify-start">
-        <img
-          src="./logoHeader.png"
+        <Image
+          height={48}
+          width={140}
+          src="/logoHeader.png"
           alt="Logo de Eurofirms University"
           className="h-12 md:mr-8"
         />
@@ -51,8 +54,10 @@ export default function Login() {
         >
           <div className="flex flex-col w-full mb-3">
             <div className="flex items-center mb-1">
-              <img
-                src="./userLogo.png"
+              <Image
+                width={24}
+                height={24}
+                src="/userLogo.png"
                 alt="Logo de usuario"
                 className="w-6 mr-2"
               />
@@ -69,8 +74,10 @@ export default function Login() {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex items-center mb-1">
-              <img
-                src="./passwordLogo.png"
+              <Image
+                width={24}
+                height={24}
+                src="/passwordLogo.png"
                 alt="Logo de candado"
                 className="w-6 mr-2"
               />

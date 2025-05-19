@@ -2,6 +2,7 @@
 
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import getSelfEvaluationFromOneModule from "../../../../../logic/marks/getSelfEvaluationFromOneModule";
 import getTeacherEvaluationFromOneModule from "../../../../../logic/marks/getTeacherEvaluationFromOneModule";
 import getAspects from "../../../../../logic/aspects/getAspects";
@@ -86,7 +87,9 @@ export default function ModuloPage() {
           {"Módulo " + moduleId + ": " + moduleName}
         </h2>
         <button onClick={() => router.back()} className="p-2 pr-4">
-          <img
+          <Image
+            width={48}
+            height={48}
             src="/volver.png"
             alt="Botón de volver"
             className="max-w-12 w-12 cursor-pointer"

@@ -8,8 +8,8 @@ const loginUser = async (email: string, password: string) => {
       email,
       password
     );
-    console.log("User logged in successfully:", userCredential.user.uid);
-
+    /*     console.log("User logged in successfully:", userCredential.user.uid);
+     */
     return userCredential.user;
   } catch (error) {
     console.error("Error logging in user:", error);

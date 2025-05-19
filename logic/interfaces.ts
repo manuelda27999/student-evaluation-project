@@ -7,6 +7,6 @@ export interface Course {
 /* Represents a module in the system */
 export interface Module {
   name: string;
-  selfEvaluation?: boolean;
-  teacherEvaluation?: boolean;
+  selfEvaluation: boolean;
+  teacherEvaluation: boolean;
 }
